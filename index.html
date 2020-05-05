@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COVID19-Classroom-Playlist</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <label for="category">Please, select your class</label>
+      <select name="category" class="category" onchange="onSelectPlaylist(this.value)">
+        <option value="PLIh66zCG3ImsDZ7EUAThIaMc9cIAf-lyr">HTML5</option>
+        <option value="PLIh66zCG3Imtr9fNJSxQhRcv-l_suimsS">CSS3</option>
+        <option value="PLIh66zCG3ImuGF7egcXvWxnKV7F3v8y36">Javascript</option>
+        <!-- <option value="basic-4">Primary Four</option> -->
+      </select>
+
+      <iframe class="video-player" src="/img/learning.png" scrolling="no">
+      </iframe>
+    </header>
+    <div class="playlist">
+      <div class="playlist-item" data-playlist-id="1">
+        <div class="img-thumb-wrapper">
+          <img class="img-thumb" src="/img/learning.png" alt="" />
+        </div>
+        <div class="playlist-content">
+          <h2 class="playlist-item-title">COVID19-Classroom-Playlist</h2>
+          <article class="playlist-item-description">
+            Connect to the internet once, start learning
+          </article>
+        </div>
+      </div>
+      <div class="playlist-item" data-playlist-id="2">
+        <div class="img-thumb-wrapper">
+          <img class="img-thumb" src="/img/learning.png" alt="" />
+        </div>
+        <div class="playlist-content">
+          <h2 class="playlist-item-title">COVID19-Classroom-Playlis </h2>
+          <article class="playlist-item-description">
+            Connect to the internet and start learning
+          </article>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/scripts/main.js"></script>
+</body>
+
+</html>
