@@ -6,6 +6,8 @@ window.addEventListener('load', function (params) {
   }else{
     alert('Please, connect to the internet & start learning')
   }
+
+  // this.setTimeout(() => { toggleInstallPromptBtn() }, 5000)
 }, false)
 
 function fetchClassroomPlaylist(playlistID = '') {
@@ -57,7 +59,7 @@ function setPlaylistItems(playlistData) {
   
   const playlists = playlistData.map( videoItem => {
     const videoId = videoItem.snippet.resourceId.videoId;
-    const description = videoItem.snippet.description;
+    const description = videoItem.snippet.description.slice(0, 100);
     const title = videoItem.snippet.title;
     const thumbImage = videoItem.snippet.thumbnails.medium.url;
     const playlistItem = `
@@ -88,3 +90,53 @@ function onSelectPlaylist(playlistID) {
   console.log('selected category', playlistID)
   fetchClassroomPlaylist(playlistID)
 }
+
+// register serviceWorker
+if ('serviceWorker' in navigator) {
+  console.log('[Browser support]::found SW in navigator');
+  navigator.serviceWorker.register('./sw.js', {
+    scope: '.'
+  })
+    .then(reg => {
+      console.log('[SW]::registered', reg.scope);
+    })
+    .catch(err => {
+      console.log('[SW]::registration failed');
+    });
+}
+function toggleInstallPromptBtn(status = true) {
+  const promptBtn = document.querySelector('.install-prompt-btn')
+  if (status) {
+    promptBtn.style.display = 'block';
+  }else{
+    promptBtn.style.display = 'none';
+  }
+}
+// Install on homescreen
+let deferredPrompt = '';
+const promptBtn = document.querySelector('.install-prompt-btn');
+
+window.addEventListener('beforeinstallprompt', e => {
+  console.log('brfore install prompt called::', e)
+  e.preventDefault()
+  deferredPrompt = e;
+  promptBtn.style.display = 'block';
+});
+
+promptBtn.addEventListener('click', e => {
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(choice => {
+    if (choice.outcome === 'accepted') {
+      console.log('User accepted to A2HS');
+      // promptBtn.style.display = 'none';
+    }
+    deferredPrompt = null;
+  })
+})
+
+
+
+
+window.addEventListener('appinstalled', evt => {
+  evt.logEvent('app installed');
+})

@@ -8,6 +8,7 @@
   margin: 0rem;
   box-sizing: border-box;
   font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
 }
 body{
   background-color: #eee;
@@ -24,6 +25,9 @@ img{
   text-align: center;
   display: block;
   background-color: #fff;
+}
+.install-prompt-btn{
+  display: none;
 }
 header{
   display: block;
