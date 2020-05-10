@@ -19,12 +19,37 @@
 
     <header>
 
-      <label for="category">Please, select your class</label>
+      <label for="category">What would you like to learn ? Select : </label>
       <select name="category" class="category" onchange="onSelectPlaylist(this.value)">
-        <option value="PLIh66zCG3ImsDZ7EUAThIaMc9cIAf-lyr">HTML5</option>
-        <option value="PLIh66zCG3Imtr9fNJSxQhRcv-l_suimsS">CSS3</option>
-        <option value="PLIh66zCG3ImuGF7egcXvWxnKV7F3v8y36">Javascript</option>
-        <!-- <option value="basic-4">Primary Four</option> -->
+        <optgroup label="Basic Science & Technology">
+          <option value="PLD8848BFDF2F06F08">Primary Science 1</option>
+          <option value="PL4VStNgKi0FkrCh_9v7UVSN7UoqqRjacs">Primary Science 2</option>
+          <option value="PLLF_mZmNqOn25pLFQkhJBl6gxHeKyB0Mo">Natural Science </option>
+          <option value="PL8B0DB9FA7252FD2E">Primary Science 4</option>
+          <option value="PL2MsUPBdnyY6o9iCai7XeJm5L9drmBPU8"> Science songs for kids 4</option>
+
+        </optgroup>
+        <optgroup label="Mathematics (Numeracy) ">
+          <option value="PLKi4WTp6PRGVdzZwuZ7l2iePX_qCQUbjp">Grade 3 Mathematics</option>
+          <option value="PLGTDzEcmZty0dcCSeSlr_jDOjScIsuSF7">Grade 1 Mathematics</option>
+          <option value="PL3evXeWNDG0ZCqwTicazVjKfFkonTLzub">Basic 4 Mathematics</option>
+          <option value="PLKi4WTp6PRGVVH8hEaTUaaHTjR7XB4_WW">Grade 6 Mathematics</option>
+          <option value="PLC3F4EDE79AD84E67">General Mathematics</option>
+          <option value="PLQqF8sn28L9yTV9WxpHw-9BbqRe_f49fr">General Maths - Multiplication</option>
+          <option value="PLrHVSJmDPvlrw2tjqfIg5KEkAQA1Jw-qf">Maths - Basic 3 & 4</option>
+
+        </optgroup>
+        <optgroup label="English Studies(Literacy)">
+          <option value="PLcnpd5fa0dQNHHPwjjI_Ow8ubEFxfbhgV">English Literacy 1</option>
+          <option value="PLB3505EAB43526725">English Literacy 2</option>
+
+        </optgroup>
+        <optgroup label="Web Development">
+          <option value="PLIh66zCG3ImsDZ7EUAThIaMc9cIAf-lyr">HTML5</option>
+          <option value="PLIh66zCG3Imtr9fNJSxQhRcv-l_suimsS">CSS3</option>
+          <option value="PLIh66zCG3ImuGF7egcXvWxnKV7F3v8y36">Javascript</option>
+        </optgroup>
+
       </select>
 
       <iframe class="video-player" src="/img/learning.png" scrolling="no">
