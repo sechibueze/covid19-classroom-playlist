@@ -1,11 +1,31 @@
 const API_KEY = 'AIzaSyApUGgHtgkFvndnjlxz5Vf9UVYIqQua5o0';
 const cacheName = 'COVID19-v1';
-const staticAssests = [
+// const currentCaches = [cacheName];
+const playlistIds = [
+  // Maths
+  'PLKi4WTp6PRGVdzZwuZ7l2iePX_qCQUbjp',
+  'PLGTDzEcmZty0dcCSeSlr_jDOjScIsuSF7',
+  'PL3evXeWNDG0ZCqwTicazVjKfFkonTLzub',
+  'PLKi4WTp6PRGVVH8hEaTUaaHTjR7XB4_WW',
+  'PLC3F4EDE79AD84E67',
+  'PLQqF8sn28L9yTV9WxpHw-9BbqRe_f49fr',
+  'PLrHVSJmDPvlrw2tjqfIg5KEkAQA1Jw-qf',
+  // Eng
+  'PLcnpd5fa0dQNHHPwjjI_Ow8ubEFxfbhgV',
+  'PLB3505EAB43526725',
+  // BST
+  'PLD8848BFDF2F06F08',
+  'PL4VStNgKi0FkrCh_9v7UVSN7UoqqRjacs',
+  'PLLF_mZmNqOn25pLFQkhJBl6gxHeKyB0Mo',
+  'PL8B0DB9FA7252FD2E',
+  'PL2MsUPBdnyY6o9iCai7XeJm5L9drmBPU8'
+]
+
+const ytPlaylistURLs = composePlaylistURLs(playlistIds);
+const defaultAssets = [
   '/',
   'index.html',
   'offline.html',
-  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&key=${API_KEY}&playlistId=PLIh66zCG3ImsDZ7EUAThIaMc9cIAf-lyr`,
-  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&key=${API_KEY}&playlistId=PLIh66zCG3Imtr9fNJSxQhRcv-l_suimsS`,
   'https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap',
   'manifest.webmanifest',
   '/css/main.css',
@@ -20,6 +40,8 @@ const staticAssests = [
   '/img/icons/icon-384x384.png',
   '/img/icons/icon-512x512.png'
 ];
+const staticAssests = defaultAssets.concat(ytPlaylistURLs);
+// console.log('SW static Assets', staticAssests);
 self.addEventListener('install', event => {
   console.log('[SW]::install event kicked off');
   event.waitUntil(
@@ -29,38 +51,52 @@ self.addEventListener('install', event => {
       })
   );
 });
-
+console.log('All caches', caches.keys())
 self.addEventListener('activate', event => {
   console.log('[SW]::activate event kicked off')
+  event.waitUntil(
+    caches.keys().then(keys => Promise.all(
+      keys.map(key => {
+        console.log('existing caches', key)
+        console.log('my cahe caches', cacheName)
+        if (key !== cacheName) {
+          console.log('Not same', cacheName, key)
+          return caches.delete(key);
+        }
+      })
+    )).then(() => {
+      console.log('SW now ready to handle fetches!');
+    })
+  );
+
 });
 
-self.addEventListener('fetch', event => {
-  console.log('[SW]::fetch event kicked off');
+self.addEventListener('fetch', function (event) {
   event.respondWith(
-    caches.match(event.request)
-      .then(cachedContentResponse => {
-        return cachedContentResponse || fetch(event.request);
-      })
+    caches.open(cacheName).then(function (cache) {
+      return cache.match(event.request).then(function (response) {
+        return response || fetch(event.request).then(function (response) {
+          console.log('fetched from network')
+          cache.put(event.request, response.clone());
+          return response;
+        });
+      });
+    })
   );
 });
-
 // self.addEventListener('fetch', event => {
 //   console.log('[SW]::fetch event kicked off');
 //   event.respondWith(
 //     caches.match(event.request)
 //       .then(cachedContentResponse => {
-//         return cachedContentResponse || fetch(event.request)
-//           .then(networkResponse => {
-//             console.log('[SW]::fetch networkresponse');
-//             caches.open(cacheName).then(cache => {
-//               console.log('[SW]::opened cache for update');
-//               cache.put(event.request, networkResponse.clone());
-//               console.log('[SW]::update cache wt network response');
-//               return networkResponse;
-//             })
-//           }).catch(error => {
-//             console.log('[SW]::Network failed::Please connect to network', error);
-//           });
+//         return cachedContentResponse || fetch(event.request);
 //       })
 //   );
 // });
+
+function composePlaylistURLs(playlistIds){
+  const playlistURLs = playlistIds.map(playlistId => {
+    return `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&key=${API_KEY}&playlistId=${playlistId}`
+  });
+  return playlistURLs;
+}

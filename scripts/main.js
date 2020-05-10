@@ -104,39 +104,39 @@ if ('serviceWorker' in navigator) {
       console.log('[SW]::registration failed');
     });
 }
-function toggleInstallPromptBtn(status = true) {
-  const promptBtn = document.querySelector('.install-prompt-btn')
-  if (status) {
-    promptBtn.style.display = 'block';
-  }else{
-    promptBtn.style.display = 'none';
-  }
-}
+// function toggleInstallPromptBtn(status = true) {
+//   const promptBtn = document.querySelector('.install-prompt-btn')
+//   if (status) {
+//     promptBtn.style.display = 'block';
+//   }else{
+//     promptBtn.style.display = 'none';
+//   }
+// }
 // Install on homescreen
-let deferredPrompt = '';
-const promptBtn = document.querySelector('.install-prompt-btn');
+// let deferredPrompt = '';
+// const promptBtn = document.querySelector('.install-prompt-btn');
 
-window.addEventListener('beforeinstallprompt', e => {
-  console.log('brfore install prompt called::', e)
-  e.preventDefault()
-  deferredPrompt = e;
-  promptBtn.style.display = 'block';
-});
+// window.addEventListener('beforeinstallprompt', e => {
+//   console.log('brfore install prompt called::', e)
+//   e.preventDefault()
+//   deferredPrompt = e;
+//   promptBtn.style.display = 'block';
+// });
 
-promptBtn.addEventListener('click', e => {
-  deferredPrompt.prompt();
-  deferredPrompt.userChoice.then(choice => {
-    if (choice.outcome === 'accepted') {
-      console.log('User accepted to A2HS');
-      // promptBtn.style.display = 'none';
-    }
-    deferredPrompt = null;
-  })
-})
-
-
+// promptBtn.addEventListener('click', e => {
+//   deferredPrompt.prompt();
+//   deferredPrompt.userChoice.then(choice => {
+//     if (choice.outcome === 'accepted') {
+//       console.log('User accepted to A2HS');
+//       // promptBtn.style.display = 'none';
+//     }
+//     deferredPrompt = null;
+//   })
+// })
 
 
-window.addEventListener('appinstalled', evt => {
-  evt.logEvent('app installed');
-})
+
+
+// window.addEventListener('appinstalled', evt => {
+//   evt.logEvent('app installed');
+// })
