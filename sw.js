@@ -3,6 +3,7 @@ const cacheName = 'COVID19-v1';
 // const currentCaches = [cacheName];
 const playlistIds = [
   // Maths
+  'PLXtv1pLcePyd8vo2F3XdMjS_se8peMPex',
   'PLKi4WTp6PRGVdzZwuZ7l2iePX_qCQUbjp',
   'PLGTDzEcmZty0dcCSeSlr_jDOjScIsuSF7',
   'PL3evXeWNDG0ZCqwTicazVjKfFkonTLzub',
@@ -11,9 +12,11 @@ const playlistIds = [
   'PLQqF8sn28L9yTV9WxpHw-9BbqRe_f49fr',
   'PLrHVSJmDPvlrw2tjqfIg5KEkAQA1Jw-qf',
   // Eng
+  'PLXtv1pLcePye5q58o5gPMgnfOdZaTxpmH',
   'PLcnpd5fa0dQNHHPwjjI_Ow8ubEFxfbhgV',
   'PLB3505EAB43526725',
   // BST
+  'PLXtv1pLcePydBKWylG4gy6WZyiORrNg_h',
   'PLD8848BFDF2F06F08',
   'PL4VStNgKi0FkrCh_9v7UVSN7UoqqRjacs',
   'PLLF_mZmNqOn25pLFQkhJBl6gxHeKyB0Mo',
